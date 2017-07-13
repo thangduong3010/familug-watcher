@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if label == 'Latest' %}
+<title>Latest posts on FAMILUG</title>
+{% else %}
+<title>Recent {{ label }} posts on FAMILUG</title>
+{% endif %}
+{% endblock %}
+
+{% block li %}
+{% if label == 'Python' %}
+    <li class="active"><a href="{{ url_for('index', label='Python') }}">Python</a></li>
+    <li><a href="{{ url_for('index', label='Command') }}">Command</a></li>
+    <li><a href="{{ url_for('index', label='sysadmin') }}">Sysadmin</a></li>
+    <li><a href="{{ url_for('index', label='Latest') }}">Latest</a></li>
+{% elif label == 'Command' %}
+    <li><a href="{{ url_for('index', label='Python') }}">Python</a></li>
+    <li class="active"><a href="{{ url_for('index', label='Command') }}">Command</a></li>
+    <li><a href="{{ url_for('index', label='sysadmin') }}">Sysadmin</a></li>
+    <li><a href="{{ url_for('index', label='Latest') }}">Latest</a></li>
+{% elif label == 'sysadmin' %}
+    <li><a href="{{ url_for('index', label='Python') }}">Python</a></li>
+    <li><a href="{{ url_for('index', label='Command') }}">Command</a></li>
+    <li class="active"><a href="{{ url_for('index', label='sysadmin') }}">Sysadmin</a></li>
+    <li><a href="{{ url_for('index', label='Latest') }}">Latest</a></li>
+{% elif label == 'Latest' %}
+    <li><a href="{{ url_for('index', label='Python') }}">Python</a></li>
+    <li><a href="{{ url_for('index', label='Command') }}">Command</a></li>
+    <li><a href="{{ url_for('index', label='sysadmin') }}">Sysadmin</a></li>
+    <li class="active"><a href="{{ url_for('index', label='Latest') }}">Latest</a></li>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="list-group">
+    {% for post in posts %}
+        <a href="{{ post.url }}" class="list-group-item list-group-item-warning">{{ post.title }}</a>
+    {% endfor %}
+    </div>
+{% endblock %}
